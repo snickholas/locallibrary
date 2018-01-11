@@ -40,6 +40,15 @@ class Book(models.Model):
         """
         return self.title
 
+    def display_genre(self):
+        """
+        Creates a string for the Genre. This is required to display genre in Admin.
+        """
+                                                # wtf is .all() doing
+        return ', '.join([genre.name for genre in self.genre.all()[:3]])
+
+    display_genre.short_description = 'Genre'
+
     def get_absolute_url(self):
         """
         Returns the url to access a particular book instance.
@@ -93,7 +102,7 @@ class BookInstance(models.Model):
         """
         String for representing the Model object
         """
-        return '{0} ({1})'.format(self.id, self.book.title)
+        return '{0} ({1})'.format(self.id, self.book)
 
 class Author(models.Model):
         """
