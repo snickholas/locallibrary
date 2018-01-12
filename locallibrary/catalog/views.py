@@ -17,9 +17,12 @@ def index(request):
     num_instances = BookInstance.objects.all().count()
 
     # available books (status = 'a')
-    num_instances_available = BookInstance.objects.filter(status__exact='a').count()
+    num_instances_available = BookInstance.objects.filter(status='a').count()
+    # __exact and __iexact both options. = is also an option, suppose its the same as exact
     total_eng_inst = BookInstance.objects.filter(book_language__iexact='english').count()
-    total_fict_inst = BookInstance.book
+    #__ used to trace back through models.
+        # many book instances are of one book. one book has many genres.
+    total_fict_inst = BookInstance.objects.filter(book__genre__name='Fiction').count()
     num_authors = Author.objects.count() #the all() is implied by default
 
     #render the html template index.html with the data in the context variable
