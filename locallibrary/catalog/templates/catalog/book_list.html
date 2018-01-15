@@ -1,0 +1,26 @@
+<!--the generic class-based views look for templates in /application_name/the_model_name_list.html (catalog/book_list.html in this case) inside the application's /application_name/templates/ directory (/catalog/templates/). -->
+
+<!--The view passes the context (list of books) by default as object_list and book_list aliases; either will work. -->
+
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Book List</h1>
+    <!-- first check to see if there are any books in book_list or if its been defined-->
+    {% if book_list %}
+    <ul>
+
+      {% for book in book_list %}
+      <li>
+        <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> ({{book.author}})
+      </li>
+
+        <!--While not used here, within the loop Django will also create other variables that you can use to track the iteration. For example, you can test the forloop.last variable to perform conditional processing the last time that the loop is run. -->
+      {% endfor %}
+
+        <!-- {% elif var2 %} also possible if we have other conditions -->
+    </ul>
+    {% else %}
+      <p>There are no books in the library.</p>
+    {% endif %}
+{% endblock %}
