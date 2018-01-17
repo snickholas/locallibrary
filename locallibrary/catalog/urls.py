@@ -22,8 +22,8 @@ urlpatterns = [
 
     # cant pass additional
 
-    path('authors/')
+    path('authors/', views.AuthorListView.as_view(), name='authors'),
 
-
+    path('author/<int:pk>', views.AuthorDetailView.as_view(), name='author-detail'),
 
 ]
