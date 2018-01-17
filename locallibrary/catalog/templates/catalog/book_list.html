@@ -12,13 +12,15 @@
 
       {% for book in book_list %}
       <li>
+          <!--link to the detail view-->
+          <!--callnig a function in the book model here. trail back goes here >> views.BookListView >> models.book(def get_abs_url) when calling functions in the html, you can NOT send arguments. Have to be careful with calling functions here because a function can literally do anything!-->
         <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> ({{book.author}})
       </li>
 
-        <!--While not used here, within the loop Django will also create other variables that you can use to track the iteration. For example, you can test the forloop.last variable to perform conditional processing the last time that the loop is run. -->
+        <!--While not used here, within the loop Django will also create other variables that you can use to track the iteration. For example, you can test the forloop.last variable to perform conditional processing the last time that the loop is run. also possible: elif var2 also possible if we have other conditions -->
       {% endfor %}
 
-        <!-- {% elif var2 %} also possible if we have other conditions -->
+
     </ul>
     {% else %}
       <p>There are no books in the library.</p>

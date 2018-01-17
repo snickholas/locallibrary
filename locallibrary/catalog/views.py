@@ -41,22 +41,45 @@ def index(request):
 # a generic view defined by django used to list objects
 class BookListView(generic.ListView):
     model = Book
+    paginate_by = 1
 
-    context_object_name = 'my_book_list'  # your own name for the list as a template variable
-    queryset = Book.objects.filter(genre__icontains='fiction')[:5]  # Get 5 books containing the title war
-    template_name = 'books/my_arbitrary_template_name_list.html'  # Specify your own template name/location
+    # context_object_name = 'my_book_list'  # your own name for the list as a template variable
+    # queryset = Book.objects.filter(genre__name='Fiction')[:5]  # Get 5 books containing the title war
+     # template_name = 'books/my_arbitrary_template_name_list.html'  # Specify your own template name/location
 
     # can override the queryset method and change what is default returned
-    # does the same as the queryset var above
+
 
     """For example, we can override the  get_queryset() method to change the list of records returned. This is more flexible than just setting the queryset attribute as we did in the preceding code fragment (though there is no real benefit in this case):"""
-    def get_queryset(self):
-        return Book.objects.filter(genre__icontains='fiction')[:5]
+    #def get_queryset(self):
+     #   return Book.objects.filter(genre__icontains='fiction')[:5]
+
+
     """We might also override get_context_data() in order to pass additional context variables to the template (e.g. the list of books is passed by default). The fragment below shows how to add a variable named "some_data" to the context (it would then be available as a template variable)."""
-    def get_context_data(self, **kwargs):
+ #   def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
-        context = super(BookListView, self).get_context_data(**kwargs)
+    #    context = super(BookListView, self).get_context_data(**kwargs)
         # Get the blog from id and add it to the context
-        context['some_data'] = 'This is just some data'
+   #     context['some_data'] = 'This is just some data'
         # return the new updated context
-        return context
+    #    return context
+
+class BookDetailView(generic.DetailView):
+    model = Book
+
+# if, for example, we weren't using the generic class based views, you could define something similar as the following:
+
+"""def book_detail_view(request, pk):
+    try:
+        book_id = Book.objects.get(pk=pk)
+    except Book.DoesNotExist:
+        raise Http404("Book does not exist")
+
+    # shortcut for raising a 404 if no record found (also a get_list variant)
+    # book_id=get_object_or_404(Book, pk=pk)
+
+    return render(
+        request,
+        'catalog/book_detail.html',
+        context={'book': book_id, }
+    ) """

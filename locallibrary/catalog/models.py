@@ -38,7 +38,7 @@ class Book(models.Model):
         """
         String for representing the Model object.
         """
-        return self.title
+        return self.title.join('meow')
 
     def display_genre(self):
         """
