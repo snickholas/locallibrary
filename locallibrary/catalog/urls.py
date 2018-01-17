@@ -22,4 +22,8 @@ urlpatterns = [
 
     # cant pass additional
 
+    path('authors/')
+
+
+
 ]
